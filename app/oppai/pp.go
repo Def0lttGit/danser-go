@@ -144,7 +144,7 @@ func (pp *PPv2) computeAimValue() float64 {
 		approachRateFactor += 0.4 * (pp.diff.ARReal - 10.33)
 	} else if pp.diff.ARReal < 8.0 {
 		approachRateFactor += 0.25 * (8.0 - pp.diff.ARReal)
-	} else if pp.diff.ARReal = 0 {
+	} else if pp.diff.ARReal == 0 {
 		approachRateFactor += 1
 	}
 
@@ -202,7 +202,7 @@ func (pp *PPv2) computeSpeedValue() float64 {
 		approachRateFactor += 0.4 * (pp.diff.ARReal - 10.33)
 	} else if pp.diff.ARReal < 8.0 {
 		approachRateFactor += 0.25 * (8.0 - pp.diff.ARReal)
-	} else if pp.diff.ARReal = 0 {
+	} else if pp.diff.ARReal == 0 {
 		approachRateFactor += 1
 	}
 
