@@ -746,14 +746,15 @@ func (overlay *ScoreOverlay) drawPP(batch *batch.QuadBatch, alpha float64) {
 
 	ppScale := settings.Gameplay.PPCounter.Scale
 
-	length := overlay.ppFont.GetWidthMonospaced(40*ppScale, "xexxar: ")
+	ppText := fmt.Sprintf("%." + strconv.Itoa(settings.Gameplay.PPCounter.Decimals) + "fpp", overlay.ppGlider.GetValue())
 
 	position := vector.NewVec2d(settings.Gameplay.PPCounter.XPosition, settings.Gameplay.PPCounter.YPosition)
 	origin := storyboard.Origin[settings.Gameplay.PPCounter.Align]
 
-	overlay.drawPP2(batch, "stable:", overlay.ppGlider.GetValue(), position, length, ppScale, ppAlpha, origin)
-	overlay.drawPP2(batch, "xexxar:", overlay.ppXGlider.GetValue(), position.AddS(0, 40*ppScale), length, ppScale, ppAlpha, origin)
-	overlay.drawPP2(batch, "tr3acc:", overlay.ppYGlider.GetValue(), position.AddS(0, 80*ppScale), length, ppScale, ppAlpha, origin)
+	batch.SetColor(0, 0, 0, ppAlpha*0.8)
+	overlay.ppFont.DrawOriginV(batch, position.AddS(ppScale, ppScale), origin, 40*ppScale, true, ppText)
+	batch.SetColor(1, 1, 1, ppAlpha)
+	overlay.ppFont.DrawOriginV(batch, position, origin, 40*ppScale, true, ppText)
 }
 
 func (overlay *ScoreOverlay) drawPP2(batch *batch.QuadBatch, title string, pp float64, position vector.Vector2d, length float64, ppScale, ppAlpha float64, origin vector.Vector2d) {
